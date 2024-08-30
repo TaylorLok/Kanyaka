@@ -13,7 +13,7 @@ To get started with this project, follow these steps:
 1. Clone the repository:
 
     ```
-    git clone https://github.com/your-username/your-project-name.git
+    git clone https://github.com/TaylorLok/Kanyaka.git
     ```
 
 2. Navigate to the project directory:
@@ -85,7 +85,7 @@ Pour commencer avec ce projet, suivez ces étapes :
 1. Clonez le dépôt :
 
     ```
-    git clone https://github.com/votre-nom-utilisateur/nom-de-votre-projet.git
+    git clone https://github.com/TaylorLok/Kanyaka.git
     ```
 
 2. Naviguez vers le répertoire du projet :
