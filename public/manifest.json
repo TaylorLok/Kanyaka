@@ -1,0 +1,22 @@
+{
+  "name": "Kanyaka App",
+  "short_name": "Kanyaka",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "Une application pour les lanceurs d'alerte en République Démocratique du Congo",
+  "icons": [
+    {
+      "src": "/icons/K-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/K-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "offline_enabled": true
+}
