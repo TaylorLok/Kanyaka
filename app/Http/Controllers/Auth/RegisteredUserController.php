@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Http\Requests\User\UserRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -29,24 +30,22 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(UserRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $validatedData = $request->validated();
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'email' => $validatedData['email'],
+            'cellphone' => $validatedData['cellphone'],
+            'password' => Hash::make($validatedData['password']),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        $user->sendEmailVerificationNotification();
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('verification.notice')->with('status', 'verification-link-sent');
     }
 }

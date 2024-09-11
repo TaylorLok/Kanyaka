@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                        &copy; {{ date('Y') }} Kanyaka. All rights reserved. T&Cs Apply
+                        &copy; {{ date('Y') }} Kanyaka. All rights reserved. T&Cs Apply te
                     </div>
                 </div>
             </div>
