@@ -19,7 +19,7 @@ To get started with this project, follow these steps:
 2. Navigate to the project directory:
 
     ```
-    cd your-project-name
+    cd Kanyaka
     ```
 
 3. Install dependencies:
@@ -40,16 +40,37 @@ To get started with this project, follow these steps:
     php artisan key:generate
     ```
 
-6. Run migrations:
+6. Install NPM dependencies:
+
+    ```
+    npm install
+    ```
+
+7. Compile assets:
+
+    ```
+    npm run dev
+    ```
+
+8. Run migrations:
 
     ```
     php artisan migrate
     ```
 
-7. Start the development server:
+9. Run the development server and compile assets:
+
     ```
     php artisan serve
     ```
+
+    In a separate terminal window, run:
+
+    ```
+    npm run dev
+    ```
+
+This will start the Laravel development server and compile the frontend assets using Vite. Keep both processes running while you're developing.
 
 ### Updating the Project
 
@@ -91,7 +112,7 @@ Pour commencer avec ce projet, suivez ces étapes :
 2. Naviguez vers le répertoire du projet :
 
     ```
-    cd nom-de-votre-projet
+    cd Kanyaka
     ```
 
 3. Installez les dépendances :
@@ -118,9 +139,27 @@ Pour commencer avec ce projet, suivez ces étapes :
     php artisan migrate
     ```
 
-7. Démarrez le serveur de développement :
+7. Installez les dépendances JavaScript :
+
+    ```
+    npm install
+    ```
+
+8. Compilez les assets :
+
+    ```
+    npm run dev
+    ```
+
+9. Démarrez le serveur de développement :
+
     ```
     php artisan serve
+    ```
+
+10. Dans un terminal séparé, exécutez le watcher de Vite pour la compilation des assets en temps réel :
+    ```
+    npm run dev
     ```
 
 ### Mise à jour du projet
