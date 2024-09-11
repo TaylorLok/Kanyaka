@@ -5,9 +5,7 @@ const urlsToCache = [
   '/manifest.json',
   '/icons/K-192x192.png',
   '/icons/K-512x512.png',
-  '/build/assets/app-CQPwt4uJ.css',
-  '/build/assets/app-CyYrc1JE.js'
-  // Add other important assets here
+  // Removed Vite hashed assets as they change on each build
 ];
 
 self.addEventListener('install', (event) => {
@@ -21,32 +19,39 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Skip caching Vite dev server files
+  if (event.request.url.includes('127.0.0.1:5173')) {
+    return fetch(event.request);
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Cache hit - return response
         if (response) {
-          return response;
+          return response; // Cache hit, return the cached response
         }
 
         return fetch(event.request).then(
           (response) => {
-            // Check if we received a valid response
+            // Check if the response is valid
             if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
+              return response; // If not valid, return it as is
             }
 
-            // Clone the response
+            // Clone the response for caching
             const responseToCache = response.clone();
 
             caches.open(CACHE_NAME)
               .then((cache) => {
-                cache.put(event.request, responseToCache);
+                cache.put(event.request, responseToCache); // Cache the fetched response
               });
 
             return response;
           }
-        );
+        ).catch(() => {
+          // Fallback for offline or failed requests
+          return caches.match('/offline.html'); // Make sure /offline.html is cached
+        });
       })
   );
 });
@@ -57,8 +62,8 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
+          if (!cacheWhitelist.includes(cacheName)) {
+            return caches.delete(cacheName); // Delete old caches not in whitelist
           }
         })
       );
